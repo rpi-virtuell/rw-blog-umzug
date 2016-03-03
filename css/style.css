@@ -1,0 +1,36 @@
+/**
+ * @package   RW Blog Umzug
+ * @author    Joachim Happel
+ * @license   GPL-2.0+
+ * @link      https://github.com/rpi-virtuell/rw-blog-umzug
+ */
+
+.rw-blog-umzug-message{
+    position: relative;
+    border: 3px solid #2E789B;
+    text-align: center;
+    background-color: darkred;
+}
+.rw-blog-umzug-message, .rw-blog-umzug-message a{
+    color:snow;
+}
+.rw-blog-umzug-message a:hover{
+    color:lightgoldenrodyellow;
+    text-decoration: underline;
+}
+
+.splash-border {
+
+    background-color: #37769A;
+    color: #ffffff;
+    padding: 30px 30px 10px;
+    border-radius: 10px;
+
+}
+.splash-border a{
+    color: #ffc106;
+    text-decoration: underline;
+}
+.splash-border a:hover{
+    color: #ffffff;
+}
