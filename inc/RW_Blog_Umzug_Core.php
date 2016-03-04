@@ -47,7 +47,7 @@ class RW_Blog_Umzug_Core {
         $trans = self::get_blogs_infos();
         if(!$trans) return;
         ?>
-        <div id="splash" style="display: none">
+        <div id="splash" style="display: block">
             <div class="splash-border">
                 <h2 class="warning">Wir ziehen um auf einen neuen Server</h2>
                 <p>Hier geht es zur neuen Seite: <a href="<?php echo $trans->new->siteurl;?>"><?php echo $trans->new->siteurl;?></a></p>
@@ -73,32 +73,33 @@ class RW_Blog_Umzug_Core {
 
         if($new_blog->blog_id > 1){
             $new_blog->main_domain = DOMAIN_CURRENT_SITE;
-
+ 
             if( $new_blog->main_domain != $new_blog->domain && $new_blog->path == '/'  ){
 
-                $new_blog->path = '/'.str_replace('.'.$new_blog->main_domain, $new_blog->domain).'/';
+                $new_blog->path = '/'.str_replace('.'.$new_blog->main_domain,'', $new_blog->domain).'/';
 
-                $new_blog->domain = $new_blog->path.'.'.self::$new_host;
-
-
-            }else{
-                $new_blog->domain = self::$new_host;
+            
             }
-
+	
             $new_blog->main_domain = self::$new_host;
+            $new_blog->domain = self::$new_host;
 
             $new_blog->siteurl = $new_blog->home = self::$new_sheme.'://'.$new_blog->domain.$new_blog->path;
+
+			$get = wp_remote_get( $new_blog->siteurl );
+			
+			if( is_array($get) ) {
+				$status = $get['response']['code']; // array of http header lines
+			}
 
         }
         //only for test
         //$new_blog->siteurl = 'http://blogs.rpi-virtuell.de/openreli4chris/';
 
-        $get = wp_remote_get( $new_blog->siteurl );
-        if( is_array($get) ) {
-            $status = $get['response']['code']; // array of http header lines
-        }
+		
+		
 
-        if($status>200){
+        if($status>200 || 0){
             return false;
         }else{
             return (object) array(
