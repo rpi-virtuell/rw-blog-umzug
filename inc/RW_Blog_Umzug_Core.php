@@ -91,7 +91,7 @@ class RW_Blog_Umzug_Core {
 
         }
         //only for test
-        $new_blog->siteurl = 'http://blogs.rpi-virtuell.de/openreli4chris/';
+        //$new_blog->siteurl = 'http://blogs.rpi-virtuell.de/openreli4chris/';
 
         $get = wp_remote_get( $new_blog->siteurl );
         if( is_array($get) ) {
